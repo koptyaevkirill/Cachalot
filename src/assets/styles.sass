@@ -1,0 +1,46 @@
+@import 'mixins'
+@import 'fonts'
+@import 'variables'
+
+*
+  &:focus
+    outline: none
+  &, &:before, &:after
+    box-sizing: border-box
+
+\:root
+  +fluidType(375px, 1920px, 12px, 18px)
+  font-family: var(--primary-font)
+  color: var(--primary-color)
+
+*, html, body
+  margin: 0
+  padding: 0
+
+a
+  text-decoration: none
+  color: var(--link-color)
+
+.link
+  +transition(color, .15s)
+  color: var(--link-color)
+  cursor: pointer
+  &:hover
+    color: var(--link-hover-color)
+  &--underline
+    --link-hover-color: var(--link-color)
+    position: relative
+    &::after
+      +transition(transform, .2s)
+      content: ''
+      background-color: var(--link-color)
+      position: absolute
+      right: 0
+      bottom: -1px
+      left: 0
+      height: 1px
+      transform: scaleX(0)
+      transform-origin: left
+    &:hover
+      &::after
+        transform: scaleX(1)
