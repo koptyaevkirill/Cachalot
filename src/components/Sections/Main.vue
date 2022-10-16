@@ -6,7 +6,7 @@ section.main
       Container(maxWidth="1320px")
         .main__heading СОЗДАЕМ ПРОСТРАНСТВО МЕЧТЫ
         MouseIcon.main__scroll
-    video.main__video(src="/images/animation/video.mp4" ref="video" preload="metadata")
+    video.main__video(v-if="!this.checkAndoid()" src="/images/animation/video.mp4" ref="video" preload="metadata")
 </template>
   
 <script>
