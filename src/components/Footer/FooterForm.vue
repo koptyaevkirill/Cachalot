@@ -43,7 +43,7 @@ export default {
       this.sending = true
       const formData = jsonToFormData(this.request)
       try {
-        const response = await axios.post('http://drupal.local', formData, {
+        const response = await axios.post('https://zto.works/mail.php', formData, {
           headers: {
             'Content-Type': 'multipart/form-data'
           }

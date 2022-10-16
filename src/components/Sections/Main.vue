@@ -62,12 +62,18 @@ export default {
       this.delay += (this.scrollpos - this.delay) * this.accelamount
 
       this.$refs.video.currentTime = this.delay
+    },
+
+    checkAndoid() {
+      return navigator.userAgent.match(/Android/i) || false
     }
   },
 
   mounted() {
-    this.animation()
-    setInterval(this.setCurrentVideoTime, 33.3)
+    if (!this.checkAndoid()) {
+      this.animation()
+      setInterval(this.setCurrentVideoTime, 33.3)
+    }
   }
 }
 </script>
