@@ -1,10 +1,17 @@
 <template lang="pug">
 .specification-preview
-  img.specification-preview__image(src="/images/model.svg")
+  img.specification-preview__image(:src="preview")
 </template>
   
 <script>
-export default {}
+export default {
+  props: {
+    preview: {
+      type: String,
+      required: true
+    }
+  }
+}
 </script>
   
 <style lang="sass" scoped>

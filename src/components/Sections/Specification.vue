@@ -10,8 +10,10 @@ section.specification
         SpecificationsItem(
           v-for="specification in specifications"
           :specification="specification"
+          :class="{active: specificationActive === specification}"
+          @change-active="changeSpecificationActive"
         )
-      SpecificationPreview.specification__model
+      SpecificationPreview.specification__model(:preview="preview")
 </template>
   
 <script>
@@ -22,18 +24,36 @@ export default {
   data() {
     return {
       specifications: [
-        { text: 'Столешница:   нержавеющая сталь AISI 304, 2мм' },
-        { text: 'Тепловая поверхность 30-90°С' },
-        { text: 'Держатель для блендера' },
-        { text: 'Смеситель, розетки 220В' },
-        { text: 'Планша гриль Teppan 30-300° 2-х зонный с водяным контуром' },
-        { text: 'Мультизонная индукционная плита 3.3 кВт' },
-        { text: 'Ложкомойка с проточной водой' }
-      ]
+        { text: 'Столешница:   нержавеющая сталь AISI 304, 2мм', image: '/images/island/stoleshnica.svg' },
+        { text: 'Тепловая поверхность 30-90°С', image: '/images/island/teplovaya_poverhnost.svg' },
+        { text: 'Держатель для блендера', image: '/images/island/derjatel_mixer.svg' },
+        { text: 'Смеситель, розетки 220В', image: '/images/island/smesitel.svg' },
+        {
+          text: 'Планша гриль Teppan 30-300° 2-х зонный с водяным контуром',
+          image: '/images/island/plansha_grill.svg'
+        },
+        { text: 'Мультизонная индукционная плита 3.3 кВт', image: '/images/island/multizone_plita.svg' },
+        { text: 'Ложкомойка с проточной водой', image: '/images/island/lojkomoika.svg' }
+      ],
+      specificationActive: null
     }
   },
 
-  components: { Container, SpecificationsItem, SpecificationPreview }
+  components: { Container, SpecificationsItem, SpecificationPreview },
+
+  computed: {
+    preview() {
+      if (this.specificationActive) return this.specificationActive.image
+
+      return '/images/island/full.svg'
+    }
+  },
+
+  methods: {
+    changeSpecificationActive(specification) {
+      this.specificationActive = specification
+    }
+  }
 }
 </script>
   

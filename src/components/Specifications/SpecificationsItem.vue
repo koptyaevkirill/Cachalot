@@ -1,5 +1,8 @@
 <template lang="pug">
-.specification-item {{ specification.text }}
+.specification-item(
+  @click="$emit('change-active', specification)"
+  @mouseover="$emit('change-active', specification)"
+) {{ specification.text }}
 </template>
   
 <script>

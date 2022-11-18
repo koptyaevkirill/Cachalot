@@ -6,15 +6,12 @@ section.main
       Container(maxWidth="1320px")
         .main__heading СОЗДАЕМ ПРОСТРАНСТВО МЕЧТЫ
         MouseIcon.main__scroll
-    video.main__video(v-if="!this.checkAndoid()" src="/images/animation/video.mp4" ref="video" preload="metadata")
+    video.main__video(:src="videoSrc" ref="video" preload="metadata" autoplay muted loop playsinline poster="/images/main-bg.jpg")
 </template>
   
 <script>
 import MouseIcon from '../Icons/MouseIcon.vue'
 import Container from '../Container.vue'
-import * as ScrollMagic from 'scrollmagic'
-import { TweenMax } from 'gsap'
-import { ScrollMagicPluginGsap } from 'scrollmagic-plugin-gsap'
 import Header from '../Navigation/Header.vue'
 
 export default {
@@ -22,58 +19,30 @@ export default {
 
   data() {
     return {
-      accelamount: 0.1,
-      scrollpos: 0,
-      delay: 0
+      videoSrc: '/images/bg.mp4'
     }
   },
 
   methods: {
-    animation() {
-      ScrollMagicPluginGsap(ScrollMagic, TweenMax)
-      const controller = new ScrollMagic.Controller()
+    videoSrcChange() {
+      if (window.innerWidth <= 900 && window.innerWidth > window.innerHeight) {
+        this.videoSrc = '/images/vertical_bg_orientation.mp4'
+        return
+      }
 
-      const videoAnimation = TweenMax.fromTo(this.$refs.video, { opacity: 0 }, { opacity: 1 })
-      const sceneVideo = new ScrollMagic.Scene({
-        triggerElement: '.main',
-        triggerHook: 0,
-        duration: 10000
-      })
-        .setPin('.main')
-        .setTween(videoAnimation)
-        .addTo(controller)
-      sceneVideo.on('update', this.updateScene)
+      if (window.innerWidth <= 900) {
+        this.videoSrc = '/images/vertical_bg.mp4'
+        return
+      }
 
-      const textAnimation = TweenMax.fromTo(this.$refs.home, { opacity: 1 }, { opacity: 0 })
-      new ScrollMagic.Scene({
-        triggerElement: '.main',
-        triggerHook: 0,
-        duration: 1000
-      })
-        .setTween(textAnimation)
-        .addTo(controller)
-    },
-
-    updateScene(e) {
-      this.scrollpos = e.scrollPos / 1000
-    },
-
-    setCurrentVideoTime() {
-      this.delay += (this.scrollpos - this.delay) * this.accelamount
-
-      this.$refs.video.currentTime = this.delay
-    },
-
-    checkAndoid() {
-      return navigator.userAgent.match(/Android/i) || false
+      this.videoSrc = '/images/bg.mp4'
+      return
     }
   },
 
   mounted() {
-    if (!this.checkAndoid()) {
-      this.animation()
-      setInterval(this.setCurrentVideoTime, 33.3)
-    }
+    this.videoSrcChange()
+    window.addEventListener('resize', this.videoSrcChange)
   }
 }
 </script>
@@ -114,7 +83,7 @@ export default {
     -webkit-text-stroke: 2px var(--secondary-color)
     color: transparent
     margin: 0 auto
-    font-weight: 300
+    font-weight: 500
     text-align: center
     letter-spacing: 0.1em
     +fluidType(375px, 1920px, 40px, 50px)
