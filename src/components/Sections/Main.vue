@@ -80,10 +80,9 @@ export default {
       background-position: 50%
       opacity: .12
   &__heading
-    -webkit-text-stroke: 2px var(--secondary-color)
-    color: transparent
+    color: #fff
     margin: 0 auto
-    font-weight: 500
+    font-weight: 600
     text-align: center
     letter-spacing: 0.1em
     +fluidType(375px, 1920px, 40px, 50px)
