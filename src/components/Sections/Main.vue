@@ -4,9 +4,9 @@ section.main
   Container.main__container(maxWidth="1920px")
     .main__home(ref="home")
       Container(maxWidth="1320px")
-        .main__heading СОЗДАЕМ ПРОСТРАНСТВО МЕЧТЫ
+        img.main__heading(src="/images/main_text.svg")
         MouseIcon.main__scroll
-    video.main__video(:src="videoSrc" ref="video" preload="metadata" autoplay muted loop playsinline poster="/images/main-bg.jpg")
+    video.main__video(:src="videoSrc" preload="true" autoplay loop muted plays-inline)
 </template>
   
 <script>
@@ -80,18 +80,10 @@ export default {
       background-position: 50%
       opacity: .12
   &__heading
-    color: #fff
     margin: 0 auto
-    font-weight: 600
-    text-align: center
-    letter-spacing: 0.1em
-    +fluidType(375px, 1920px, 40px, 50px)
-    +media(700px)
-      +fluidType(375px, 1920px, 55px, 60px)
-      max-width: 80%
-    +media(960px)
-      +fluidType(375px, 1920px, 70px, 80px)
-      max-width: 80%
+    max-width: 100%
+    width: 100%
+    min-width: 80vw
   &__scroll
     display: inline-block
     position: absolute
